@@ -1,91 +1,90 @@
-# AI/Machine Learning Intern Challenge: Simple Content-Based Recommendation
+# Movie Recommender
 
-**Deadline**: Sunday, Feb 23th 11:59 pm PST
-
----
+This repository contains a Python-based recommender system that utilizes TF-IDF, cosine similarity, and additional heuristics (genre matching and setting detection) to suggest movies based on user input.
 
 ## Overview
 
-Build a **content-based recommendation system** that, given a **short text description** of a user’s preferences, suggests **similar items** (e.g., movies) from a small dataset. This challenge should take about **3 hours**, so keep your solution **simple** yet **functional**.
+The **Movie Recommender** is designed to:
+1. Parse a movie dataset (e.g., *imdb_top_1000.csv*).
+2. Generate weighted text features for each movie (including repeated genres and overviews).
+3. Use **TF-IDF vectorization** to calculate baseline similarity among movies.
+4. **Extract genres** from user input via a customizable dictionary of synonyms.
+5. Account for user interest in specific *settings* (e.g., “space,” “medieval,” etc.) to refine recommendations.
+6. Return top movie suggestions based on a **composite similarity score** blending TF-IDF, genre matching, and setting matching.
 
-### Example Use Case
 
-- The user inputs:  
-  *"I love thrilling action movies set in space, with a comedic twist."*  
-- Your system processes this description (query) and compares it to a dataset of items (e.g., movies with their plot summaries or keywords).  
-- You then return the **top 3–5 “closest” matches** to the user.
+## Features
 
----
+- **Genre Synonym Recognition**: Maps multiple user expressions (e.g., “scifi,” “science fiction,” “sf”) to the canonical genre `sci-fi`.
+- **Weighted Feature Engineering**: Gives more importance to genres and overviews (repetition in the text) for better alignment with user preferences.
+- **Setting Detection**: Boosts recommendations if a movie’s overview matches the user’s desired setting (e.g., “space,” “future,” “historical”).
+- **Composite Scoring**: 
+  - TF-IDF Similarity (40%)
+  - Genre Match (30%)
+  - Setting Match (30%)
 
-## Requirements
 
-1. **Dataset**  
-   - Use a **small** public dataset of items (e.g., a list of movies with plot summaries, or other textual descriptions).  
-   - Make sure the dataset is easy to handle (maybe 100–500 rows) so the solution remains quick to implement and run.  
-   - Include the dataset in your forked repository *or* provide instructions/link on how to download it.  
+## Data
 
-2. **Approach**  
-   - **Content-Based**: At a minimum, use text similarity to recommend items.  
-     - For instance, you can transform both the user’s text input and each item’s description into TF-IDF vectors and compute **cosine similarity**.  
-   - Return the **top N** similar items (e.g., top 5).
+By default, this project references an **IMDb-style dataset** named `imdb_top_1000.csv`.  
+- **Columns Expected**: `Series_Title`, `Released_Year`, `Genre`, `Overview`, `Director`, `Star1`, `Star2`, `IMDB_Rating`, etc.  
 
-3. **Code Organization**  
-   - You may use a **Jupyter Notebook** or **Python scripts**.  
-   - Keep it **readable** and **modular** (e.g., one section for loading data, one for building vectors, one for computing similarity, etc.).  
-   - Briefly comment or docstring your key functions/sections.
 
-4. **Output**  
-   - When given an input description (e.g., `"I like action movies set in space"`), your system should print or return a list of recommended items (e.g., 3–5 titles).  
-   - Include the similarity score or rank if you’d like.
+## Running:
 
-5. **Summary & Instructions**  
-   - A short `README.md` that includes:
-     - **Dataset**: Where it’s from, any steps to load it.  
-     - **Setup**: Python version, virtual environment instructions, and how to install dependencies (`pip install -r requirements.txt`).  
-     - **Running**: How to run your code (e.g., `python recommend.py "Some user description"` or open your notebook in Jupyter).  
-     - **Results**: A brief example of your system’s output for a sample query.
+1. **Open the notebook**:
+   - **Google Colab**:
+     - Upload your `.ipynb` file to [Colab](https://colab.research.google.com/).
+     - Alternatively, if your notebook is on GitHub, open it directly by replacing `github.com` with `colab.research.google.com/github` in your browser’s address bar.
+   - **Jupyter Notebook**:
+     - Run `jupyter notebook MovieRecommender.ipynb` in your terminal (ensure Jupyter is installed).
 
----
+2. **Upload or place the CSV**:
+   - In **Google Colab**, you can upload the CSV via the *Files* panel, or mount Google Drive:
+     ```python
+     from google.colab import drive
+     drive.mount('/content/drive')
+     ```
+     Then copy or move the CSV into your Colab workspace.
+   - In **Jupyter Notebook**, simply place the CSV file in the same folder as your `.ipynb` (or specify the correct path).
 
-## Deliverables
+3. **Run all cells** from top to bottom:
+   - This will import libraries, initialize the recommender class, and set up everything required.
 
-1. **Fork the Public Repository**  
-   - **Fork** this repo into your own GitHub account.
+4. Enter your Movie Description and get the Recommendations.
+  
+ ## Output:
 
-2. **Implement Your Solution**  
-   - Load and preprocess your dataset (e.g., read CSV, handle text columns).  
-   - Convert text data to vectors (e.g., TF-IDF).  
-   - Implement a function to compute similarity between the user’s query and each item’s description.  
-   - Return the top matches.
-   - Salary expectation per month (Mandatory)
+```python
+Enter your movie preferences: I love action and science fiction movies.
 
-3. **Short Video Demo**  
-   - In a `.md` file (e.g., `demo.md`) within your fork, paste a link to a **brief screen recording** (video link).  
-   - Demonstrate:
-     - How you run the recommendation code.  
-     - A sample query and the results.
+Recommendations for: 'I love action and science fiction movies.'
 
-4. **Deadline**  
-   - Submit your fork by **Sunday, Feb 23th 11:59 pm PST**.
+1. Captain America: Civil War (2016) - Action, Adventure, Sci-Fi
+   Rating: 7.8
+   Similarity Score: 0.315
+   Overview: Political involvement in the Avengers' affairs causes a rift between Captain America and Iron Man....
 
-> **Note**: This should be doable within ~3 hours. Keep it **straightforward**—you do **not** need advanced neural networks or complex pipelines. A simple TF-IDF + cosine similarity approach is sufficient.
+2. Serenity (2005) - Action, Adventure, Sci-Fi
+   Rating: 7.8
+   Similarity Score: 0.315
+   Overview: The crew of the ship Serenity try to evade an assassin sent to recapture one of their members who is telepathic....
 
----
+3. Edge of Tomorrow (2014) - Action, Adventure, Sci-Fi
+   Rating: 7.9
+   Similarity Score: 0.314
+   Overview: A soldier fighting aliens gets to relive the same day over and over again, the day restarting every time he dies....
 
-## Evaluation Criteria
+4. Predator (1987) - Action, Adventure, Sci-Fi
+   Rating: 7.8
+   Similarity Score: 0.314
+   Overview: A team of commandos on a mission in a Central American jungle find themselves hunted by an extraterrestrial warrior....
 
-1. **Functionality**  
-   - Does your code run without errors?  
-   - When given an input query, does it successfully output relevant items?
+5. Rogue One (2016) - Action, Adventure, Sci-Fi
+   Rating: 7.8
+   Similarity Score: 0.313
+   Overview: The daughter of an Imperial scientist joins the Rebel Alliance in a risky move to steal the plans for the Death Star....
+```
 
-2. **Code Quality**  
-   - Clear, commented code (where it counts).  
-   - Logical steps (load data → transform → recommend).
+## Expected Salary: 6000 $ per Month
 
-3. **Clarity**  
-   - Is your `README.md` straightforward about setup, how to run, and what to expect?
-
-4. **ML/Recommendation Understanding**  
-   - Basic implementation of a content-based recommendation approach (vectorization, similarity measure).
-
-**We look forward to seeing your solution!** Good luck!
