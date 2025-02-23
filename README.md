@@ -86,5 +86,5 @@ Recommendations for: 'I love action and science fiction movies.'
    Overview: The daughter of an Imperial scientist joins the Rebel Alliance in a risky move to steal the plans for the Death Star....
 ```
 
-### Expected Salary: 6000 $ per Month
+### Expected Salary: 4000 $ per Month
 
