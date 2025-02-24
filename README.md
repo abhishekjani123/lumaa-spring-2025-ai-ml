@@ -1,4 +1,4 @@
-# Movie Recommender
+# Movie Recommender 
 
 This repository contains a Python-based recommender system that utilizes TF-IDF, cosine similarity, and additional heuristics (genre matching and setting detection) to suggest movies based on user input.
 
@@ -23,6 +23,9 @@ The **Movie Recommender** is designed to:
   - Genre Match (30%)
   - Setting Match (30%)
 
+## Video:
+
+https://github.com/user-attachments/assets/c06856dc-6aeb-4bb4-9a5e-8aac87b1571c
 
 ## Data
 
