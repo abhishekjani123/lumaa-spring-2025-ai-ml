@@ -5,7 +5,7 @@ This repository contains a Python-based recommender system that utilizes TF-IDF,
 ## Overview
 
 The **Movie Recommender** is designed to:
-1. Parse a movie dataset (e.g., *imdb_top_1000.csv*).
+1. Parse a movie dataset (e.g., *imdb_top_1000.csv*)
 2. Generate weighted text features for each movie (including repeated genres and overviews).
 3. Use **TF-IDF vectorization** to calculate baseline similarity among movies.
 4. **Extract genres** from user input via a customizable dictionary of synonyms.
