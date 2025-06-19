@@ -1,4 +1,4 @@
-# Movie Recommender 
+# Movie Recommendation System using TF-IDF and cosine similarity
 
 This repository contains a Python-based recommender system that utilizes TF-IDF, cosine similarity, and additional heuristics (genre matching and setting detection) to suggest movies based on user input.
 
